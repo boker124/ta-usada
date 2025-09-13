@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Tà Usada</title>
+  <style>
+    :root{
+      --beige: #f5f5dc;
+      --terracota: #e2725b;
+      --terracota-dark: #a0522d;
+      --verde-oliva: #556b2f;
+      --shadow: rgba(15,15,20,0.12);
+    }
+
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      font-family: "Segoe UI", Roboto, Arial, sans-serif;
+      background: var(--beige);
+      color: #222;
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+      overflow-x: hidden;
+    }  
+
+    @keyframes fadeInUp { from{opacity:0; transform:translateY(28px)} to{opacity:1; transform:none} }
+    @keyframes subtleFloat { 0%{transform:translateY(0)} 50%{transform:translateY(-6px)} 100%{transform:translateY(0)} }
+    @keyframes shine {
+      0% { background-position: -150% 0; }
+      100% { background-position: 250% 0; }
+    }
+
+    header{
+      display:flex;
+      justify-content:center;
+      align-items:center;
+      padding:42px 20px;
+      background: linear-gradient(135deg,var(--terracota), var(--verde-oliva));
+      animation: fadeInUp .9s ease both;
+    }
+
+    .title-box{
+      background: #fff;
+      display:flex;
+      align-items:center;
+      gap:20px;
+      padding:24px 34px;
+      border-radius:20px;
+      box-shadow: 0 12px 36px var(--shadow);
+      transition: transform .35s cubic-bezier(.2,.9,.3,1), box-shadow .35s;
+      will-change: transform;
+      position: relative;
+      overflow: hidden;
+      max-width:1100px;
+      width:100%;
+      justify-content:center;
+    }
+
+    .title-box::before{
+      content:"";
+      position:absolute;
+      inset:0;
+      background: linear-gradient(120deg, rgba(255,255,255,0.02) 0%, rgba(255,255,255,0.06) 20%, rgba(255,255,255,0.02) 40%, rgba(255,255,255,0) 100%);
+      pointer-events:none;
+      mix-blend-mode: overlay;
+    }
+
+    .title-box:hover{ transform:translateY(-6px) scale(1.01); box-shadow: 0 28px 60px rgba(10,10,20,0.16) }
+
+    .logo-title{
+      display:flex;
+      align-items:center;
+      gap:18px;
+    }
+
+    .logo-title img{
+      height: 110px;
+      width: 110px;
+      border-radius:18px;
+      object-fit:cover;
+      animation: subtleFloat 6s ease-in-out infinite;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.12);
+    }
+
+    .title-text{
+      text-align:left;
+      line-height:1;
+    }
+    .title-text h1{
+      margin:0;
+      font-size:36px;
+      color:var(--terracota-dark);
+      letter-spacing:6px;
+      text-transform:uppercase;
+    }
+    .title-text p{
+      margin:6px 0 0;
+      color:#555;
+      font-size:14px;
+    }
+
+    main{ padding:30px 20px 60px; max-width:1200px; margin:0 auto; }
+    section{ margin:48px 0; animation: fadeInUp .9s ease both; }
+    p.lead{ color:#333; max-width:900px; margin:0 auto; font-size:16px; line-height:1.6; }
+
+    /* Recuadro títulos */
+    .section-title{
+      display:inline-block;
+      background:#fff;
+      padding:12px 28px;
+      border-radius:14px;
+      box-shadow:0 6px 18px var(--shadow);
+      text-align:center;
+      margin:0 auto 20px;
+      font-size:28px;
+      color:var(--verde-oliva);
+      position:relative;
+      left:50%;
+      transform:translateX(-50%);
+    }
+
+    .grid-process,
+    .grid-catalog {
+      display:block;
+      max-width: 980px;
+      margin: 22px auto 0;
+    }
+
+    .row-top, .row-bottom{
+      display:flex;
+      gap:22px;
+      justify-content:center;
+      margin-bottom:18px;
+      flex-wrap:nowrap;
+    }
+
+    .card{
+      width:300px;
+      height:380px;
+      background:#fff;
+      border-radius:14px;
+      overflow:hidden;
+      box-shadow: 0 10px 28px var(--shadow);
+      display:flex;
+      flex-direction:column;
+      justify-content:flex-start;
+      transition: transform .18s ease, box-shadow .18s ease;
+      transform-origin: center;
+      cursor:pointer;
+      will-change: transform;
+    }
+
+    .card .imgwrap{ height: 220px; overflow:hidden; }
+    .card img{ width:100%; height:100%; object-fit:cover; display:block; }
+    .card .content{ padding:14px 16px; color:#333; font-size:15px; line-height:1.5; flex:1; }
+
+    .card:hover{ box-shadow: 0 20px 44px rgba(10,10,20,0.18); }
+
+    footer{
+      margin-top:36px;
+      background: linear-gradient(90deg,var(--verde-oliva), var(--terracota-dark));
+      color:#fff;
+      padding:28px 18px;
+      text-align:center;
+      border-top:6px solid rgba(255,255,255,0.06);
+    }
+
+    footer p{ margin:6px 0; font-size:16px; }
+
+    @media (max-width:1040px){
+      .title-box{ padding:20px; gap:14px; }
+      .logo-title img{ height:92px; width:92px; }
+      .title-text h1{ font-size:30px; }
+    }
+    @media (max-width:880px){
+      .row-top, .row-bottom{ flex-wrap:wrap; gap:18px; }
+      .card{ width:calc(50% - 14px); margin:auto; }
+    }
+    @media (max-width:520px){
+      .logo-title img{ height:70px; width:70px; }
+      .title-text h1{ font-size:22px; }
+      .card{ width:100%; height:auto; }
+    }
+
+    .reveal { opacity:0; transform: translateY(18px); transition: all .8s cubic-bezier(.2,.9,.3,1); }
+    .reveal.visible { opacity:1; transform: none; }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="title-box reveal">
+      <div class="logo-title">
+        <img src="https://i.postimg.cc/vBfkWYXm/ta-usada.jpg" alt="Logo Tà Usada">
+      </div>
+      <div class="title-text">
+        <h1>Tà Usada</h1>
+        <p>Moda circular • Empaques ecológicos • Estilo responsable</p>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section class="reveal">
+      <h2 class="section-title">Introducción</h2>
+      <p class="lead">
+        La industria de la moda es una de las más contaminantes del mundo, generando toneladas de residuos y un alto consumo de recursos naturales.
+        Ante esta problemática, nace <strong>Tà Usada</strong>, una empresa que promueve el consumo responsable a través de la venta y empaque de ropa de segunda mano.
+        Damos nueva vida a prendas en buen estado, ofreciendo moda con propósito y reduciendo el impacto ambiental.
+      </p>
+    </section>
+
+    <section class="reveal">
+      <h2 class="section-title">Misión</h2>
+      <p class="lead">
+        Queremos cambiar la forma en que las personas consumen moda. Vendemos ropa de segunda mano con estilo, originalidad y buenos precios,
+        dándole una nueva oportunidad a cada prenda. Promovemos un estilo de vida responsable, donde vestir bien no signifique dañar al planeta.
+      </p>
+    </section>
+
+    <section class="reveal">
+      <h2 class="section-title">Visión (2033)</h2>
+      <p class="lead">
+        En 2033 nos vemos como una marca juvenil, creativa y consciente, inspirando a más personas a combinar su estilo con acciones que marcan la diferencia.
+        Expandiremos la educación ambiental y la moda circular, donde cada prenda cuente una historia.
+      </p>
+    </section>
+
+    <section class="reveal">
+      <h2 class="section-title">Nuestro Proceso</h2>
+
+      <div class="grid-process">
+        <div class="row-top">
+          <article class="card reveal">
+            <div class="imgwrap"><img src="https://i.postimg.cc/dtB2GcZf/Whats-App-Image-2025-09-13-at-1-46-27-PM.jpg" alt="Recepción"></div>
+            <div class="content"><strong>1. Recepción</strong><br>Recibimos la ropa, ya clasificada, transformada e higienizada por nuestros aliados.</div>
+          </article>
+
+          <article class="card reveal">
+            <div class="imgwrap"><img src="https://i.postimg.cc/Dwp1YQgd/f.jpg" alt="Clasificación"></div>
+            <div class="content"><strong>2. Clasificación y fotografías</strong><br>Organizamos por tallas y tipo de prenda para las fotos del catálogo.</div>
+          </article>
+
+          <article class="card reveal">
+            <div class="imgwrap"><img src="https://i.postimg.cc/JzQR1KgZ/PREPARACION.jpg" alt="Preparacion"></div>
+            <div class="content"><strong>3. Preparación de empaques</strong><br>Alistamos empaques sostenibles (papel craft, cajas recicladas) con etiquetas positivas.</div>
+          </article>
+        </div>
+
+        <div class="row-bottom">
+          <article class="card reveal">
+            <div class="imgwrap"><img src="https://i.postimg.cc/RV5mKjxw/EMPAQUE.jpg" alt="Empaque"></div>
+            <div class="content"><strong>4. Empaque</strong><br>Doblamos y empacamos cada prenda, verificando limpieza y presentación.</div>
+          </article>
+
+          <article class="card reveal">
+            <div class="imgwrap"><img src="https://i.postimg.cc/fRz6vs2S/FINAL.jpg" alt="Final"></div>
+            <div class="content"><strong>5. Producto final</strong><br>Entregamos el pedido en empaque ecológico con un mensaje positivo para el cliente.</div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="reveal">
+      <h2 class="section-title">Catálogo</h2>
+
+      <div class="grid-catalog">
+        <div class="row-top">
+          <article class="card reveal">
+            <div class="imgwrap"><img src="https://i.postimg.cc/q7QSF5FD/c.jpg" alt="Chaqueta jean"></div>
+            <div class="content"><strong>Chaqueta de jean</strong><br>Estado: Excelente · Talla: M · Precio: $35.000</div>
+          </article>
+
+          <article class="card reveal">
+            <div class="imgwrap"><img src="https://i.postimg.cc/sgzVdbn3/b.jpg" alt="Camisa oversize"></div>
+            <div class="content"><strong>Camisa oversize</strong><br>Estado: Buen estado · Talla: XL · Precio: $15.000</div>
+          </article>
+
+          <article class="card reveal">
+            <div class="imgwrap"><img src="https://i.postimg.cc/Dwp1YQgd/f.jpg" alt="Jean mezclilla"></div>
+            <div class="content"><strong>Jean de mezclilla</strong><br>Estado: Buen estado · Talla: 28 · Precio: $20.000</div>
+          </article>
+        </div>
+
+        <div class="row-bottom">
+          <article class="card reveal">
+            <div class="imgwrap"><img src="https://i.postimg.cc/65n9PBfH/d.jpg" alt="Blusa"></div>
+            <div class="content"><strong>Blusa de tirantes</strong><br>Estado: Excelente · Talla: S · Precio: $10.000</div>
+          </article>
+
+          <article class="card reveal">
+            <div class="imgwrap"><img src="https://i.postimg.cc/0jvSJVkx/a.jpg" alt="Buzo"></div>
+            <div class="content"><strong>Buzo</strong><br>Estado: Excelente · Talla: L · Precio: $10.000</div>
+          </article>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <p>Puedes comunicarte con nosotros al número: <strong>+57 315 456 7890</strong></p>
+    <p>O al correo: <strong>contacto@tausada.com</strong></p>
+    <p style="margin-top:8px; opacity:.9">© 2025 Tà Usada</p>
+  </footer>
+
+  <script>
+    const reveals = document.querySelectorAll('.reveal');
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) e.target.classList.add('visible');
+      });
+    }, {threshold: 0.12});
+    reveals.forEach(r => io.observe(r));
+
+    const cards = document.querySelectorAll('.card');
+    const maxRot = 8; 
+    const maxTiltTranslate = -12; 
+
+    function handleMove(e){
+      const card = e.currentTarget;
+      const rect = card.getBoundingClientRect();
+      const px = (e.clientX - rect.left) / rect.width;
+      const py = (e.clientY - rect.top) / rect.height;
+      const rotateY = (px - 0.5) * (maxRot * 2); 
+      const rotateX = -(py - 0.5) * (maxRot * 2);
+      card.style.transform = `translateY(${maxTiltTranslate}px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(1.03)`;
+    }
+    function handleEnter(e){
+      if (window.innerWidth < 880) return;
+      const card = e.currentTarget;
+      card.style.transition = 'transform 0.12s ease';
+      card.style.willChange = 'transform';
+    }
+    function handleLeave(e){
+      const card = e.currentTarget;
+      card.style.transition = 'transform 0.35s cubic-bezier(.2,.9,.3,1)';
+      card.style.transform = `translateY(0px) rotateX(0deg) rotateY(0deg) scale(1)`;
+      card.style.willChange = 'auto';
+    }
+
+    cards.forEach(c=>{
+      c.addEventListener('mousemove', handleMove);
+      c.addEventListener('mouseenter', handleEnter);
+      c.addEventListener('mouseleave', handleLeave);
+    });
+
+    cards.forEach(c => {
+      c.setAttribute('tabindex','0');
+      c.addEventListener('focus', () => { c.style.transform = 'translateY(-10px) scale(1.02)'; });
+      c.addEventListener('blur', () => { c.style.transform = 'translateY(0) scale(1)'; });
+    });
+  </script>
+</body>
+</html>
